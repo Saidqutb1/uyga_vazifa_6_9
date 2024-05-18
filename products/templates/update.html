@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    update book
+{% endblock title %}
+
+{% block content %}
+<style>
+        /* Apply styles to the form container */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply styles to the form elements */
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Apply styles to the submit button */
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+{% endblock content %}

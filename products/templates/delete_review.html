@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Review
+{% endblock title %}
+
+{% block content %}
+
+    <style>
+        /* Apply styles to the container */
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply styles to the confirmation message */
+        .confirmation-message {
+            margin-bottom: 20px;
+        }
+
+        /* Apply styles to the form */
+        form {
+            margin-bottom: 20px;
+        }
+
+        /* Apply styles to the submit button */
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+
+        /* Apply styles to the cancel button */
+        .no-link {
+            color: #007bff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .no-link:hover {
+            background-color: #e2e6ea;
+        }
+    </style>
+
+    <div class="container">
+        <p class="confirmation-message">Вы точно хотите удалить "{{ object }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Confirm">
+        </form>
+        <a href="{% url 'products:book_detail' pk=review.book.pk %}" class="no-link">Cancel</a>
+    </div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

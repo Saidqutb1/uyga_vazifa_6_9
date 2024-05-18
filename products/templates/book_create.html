@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create Book
+{% endblock title %}
+
+{% block content %}
+    <style>
+        /* Стили для контейнера формы */
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Стили для элементов формы */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div class="form-container">
+        <h1>Create Book</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+{% endblock content %}

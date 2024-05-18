@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info {
+        margin-bottom: 20px;
+    }
+
+    .profile-info h2 {
+        margin-bottom: 10px;
+    }
+
+    .profile-info p {
+        margin: 5px 0;
+    }
+
+    .edit-profile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edit-profile label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .edit-profile input[type="text"],
+    .edit-profile input[type="email"] {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .edit-profile button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: auto;
+    }
+
+    .edit-profile button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container">
+    <div class="profile-info">
+        <h2>User Profile</h2>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+    <div class="edit-profile">
+        <h2>Edit Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}">
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

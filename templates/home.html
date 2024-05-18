@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    home page
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+    <h1>Home Page</h1>
+    <button><a href="{% url 'products:book_list' %}">Books</a></button>
+    {% if not request.user.is_authenticated %}
+        <button><a href="{% url 'users:register' %}">Register</a></button>
+        <button><a href="{% url 'users:login' %}">Login</a></button>
+    {% else %}
+        <button><a href="{% url 'users:logout' %}">Logout</a></button>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <button><a href="{% url 'users:profile' %}">Profile</a></button>
+    {% endif %}
+</div>
+     <style>
+        /* Apply styles to the container */
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply styles to headings */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Apply styles to links */
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Apply styles to buttons */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+{% endblock content %}

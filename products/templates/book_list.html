@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Books
+{% endblock title %}
+
+{% block content %}
+<style>
+    /* Apply general styles to the books container */
+    .books-container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Apply styles to headings */
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Apply styles to links */
+    a {
+        color: #007bff;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+    }
+
+    /* Apply styles to the "Add Book" link */
+    .add-book-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-book-link:hover {
+        background-color: #0056b3;
+    }
+
+    /* Apply styles to book links */
+    .book-link {
+        display: block;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .book-link:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<div class="books-container">
+    <h1>Books Page</h1>
+    <a href="{% url 'products:book_create' %}" class="add-book-link">Add Book</a>
+    <hr>
+    {% for book in books %}
+        <a href="{% url 'products:book-detail' book.pk %}" class="book-link">{{ book.title }}</a>
+    {% empty %}
+        <p>No books available.</p>
+    {% endfor %}
+</div>
+{% endblock content %}

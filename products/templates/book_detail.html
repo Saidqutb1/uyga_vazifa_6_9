@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    home page
+{% endblock title %}
+
+{% block content %}
+    <style>
+        /* Apply general styles to the content wrapper */
+        .content-wrapper {
+            margin: 20px;
+        }
+
+        /* Apply styles to the book details container */
+        .book-details-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply styles to headings */
+        h1 {
+            color: #333;
+        }
+
+        /* Apply styles to links */
+        a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        a.delete-link {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        a.add-review-link {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Apply styles to review items */
+        .review-item {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Apply styles to edit and delete buttons */
+        .btn {
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+    </style>
+     <div class="content-wrapper">
+        <div class="book-details-container">
+            <h1>Name: {{ book.title }}</h1>
+            {% if book.image %}
+                <img src="{{ book.image.url }}" alt="Book Image" height="200px"><br><br>
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+            <h4>Description: {{ book.description }}</h4>
+            <h4>Price: {{ book.price }}</h4>
+            <h4>Pages: {{ book.page }}</h4>
+            <a href="{% url 'products:book-delete' pk=book.pk %}" class="delete-link">Delete</a>
+            <a href="{% url 'products:book-update' pk=book.pk %}" class="add-review-link">Update</a><br><br>
+
+            <h2>Reviews</h2>
+            {% if not user_has_reviewed %}
+                <a href="{% url 'products:add-review' pk=book.pk %}" class="btn btn-primary">Add Review</a><br><br>
+            {% endif %}
+
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review-item">
+                        <h4>{{ review.user.username }} | {{ review.star_given }} stars</h4>
+                        <p>{{ review.comment }}</p><br>
+                        {% if review.user == current_user %}
+                            <div>
+                                <a href="{% url 'products:update-review' pk=review.pk %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'products:delete-review' pk=review.pk %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

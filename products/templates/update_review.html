@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    update review
+{% endblock title %}
+
+{% block content %}
+    <style>
+        /* Apply styles to the container */
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply styles to headings */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Apply styles to the form */
+        form {
+            margin-bottom: 20px;
+        }
+
+        /* Apply styles to form elements */
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Apply styles to messages */
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .messages li {
+            margin-bottom: 10px;
+            color: #dc3545; /* Red color for error messages */
+        }
+    </style>
+
+    <div class="container">
+        <h1>{{ books.title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update Review">
+        </form>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    book delete
+{% block content %}
+
+    <style>
+        /* Apply styles to the confirmation message */
+        .confirmation-message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Apply styles to the form container */
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply styles to the submit button */
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: auto; /* Adjust width to fit content */
+        }
+
+        /* Apply styles to the cancel button */
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        a.no-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+
+    <div class="container">
+        <p class="confirmation-message">Вы уверены что хотите удалить {{ object }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Confirm">
+        </form>
+        <button><a href="{% url 'products:book_detail' object.pk %}" class="no-link">Cancel</a></button>
+    </div>
+{% endblock content %}
